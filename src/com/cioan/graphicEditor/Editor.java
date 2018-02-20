@@ -1,5 +1,6 @@
 package com.cioan.graphicEditor;
 
+@SuppressWarnings("ForLoopReplaceableByForEach")
 public class Editor {
 
     private Rectangle elemente[] = new Rectangle[10];
@@ -73,16 +74,17 @@ public class Editor {
 
 
     public String toString() {
-        String ret = "";
+        StringBuilder ret = new StringBuilder("");
 
         for (Rectangle element : elemente) {
             if (element != null) {
-                ret = ret + element + ", ";
+                ret.append(element).append(", ");
+
             } else {
-                ret += "null, ";
+                ret.append("null, ");
             }
         }
-        return ret;
+        return ret.toString();
     }
 
     public Rectangle[] getElementsIntersectingPoint(int x, int y) {
