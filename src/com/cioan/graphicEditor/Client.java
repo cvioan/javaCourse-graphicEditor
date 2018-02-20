@@ -12,20 +12,20 @@ public class Client {
         editor.createRectangle(1, 3, 2, 2);
         editor.createRectangle(5, -1, 4, 3);
         System.out.println("Aria totala este: " + editor.getTotalArea());
-        editor.removeElementsSmallerThan(1);
+        editor.removeElementsSmallerThan(2);
         System.out.println(editor);
         System.out.println();
         Rectangle[] raport = editor.reportLeftToRight();
-        for (int cnt = 0; cnt < raport.length; ++cnt) {
-            System.out.println(raport[cnt]);
+        for (Rectangle element: raport) {
+            System.out.println(element);
         }
         System.out.println();
         Rectangle[] elements = editor.getElementsIntersectingPoint(4, 3);
         int qty = 0;
-        for (int cnt = 0; cnt < elements.length; ++cnt) {
+        for (Rectangle element: elements) {
 
-            if (elements[cnt] != null) {
-                System.out.println(elements[cnt]);
+            if (element != null) {
+                System.out.println(element);
                 qty++;
             }
         }

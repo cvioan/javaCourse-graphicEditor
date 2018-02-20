@@ -20,9 +20,9 @@ public class Editor {
 
     public int getTotalArea() {
         int totalArea = 0;
-        for (int cnt = 0; cnt < this.elemente.length; ++cnt) {
-            if (this.elemente[cnt] != null) {
-                totalArea = totalArea + this.elemente[cnt].getArea();
+        for (Rectangle element : elemente) {
+            if (element != null) {
+                totalArea = totalArea + element.getArea();
             }
         }
         return totalArea;
@@ -40,9 +40,8 @@ public class Editor {
 
     public Rectangle[] reportLeftToRight() {
         int newArrayLength = 0;
-        int minX;
-        for (int cnt = 0; cnt < elemente.length; ++cnt) {
-            if (elemente[cnt] != null) {
+        for (Rectangle element : elemente) {
+            if (element != null) {
                 newArrayLength++;
             }
         }
@@ -50,9 +49,9 @@ public class Editor {
         Rectangle[] report = new Rectangle[newArrayLength];
 
         int elem = 0;
-        for (int cnt = 0; cnt < elemente.length; ++cnt) {
-            if (elemente[cnt] != null) {
-                report[elem] = elemente[cnt];
+        for (Rectangle element : elemente) {
+            if (element != null) {
+                report[elem] = element;
                 elem++;
             }
         }
@@ -76,9 +75,9 @@ public class Editor {
     public String toString() {
         String ret = "";
 
-        for (int cnt = 0; cnt < this.elemente.length; ++cnt) {
-            if (elemente[cnt] != null) {
-                ret = ret + elemente[cnt] + ", ";
+        for (Rectangle element : elemente) {
+            if (element != null) {
+                ret = ret + element + ", ";
             } else {
                 ret += "null, ";
             }
@@ -89,8 +88,8 @@ public class Editor {
     public Rectangle[] getElementsIntersectingPoint(int x, int y) {
         int newArrayLength = 0;
 
-        for (int cnt = 0; cnt < elemente.length; ++cnt) {
-            if (elemente[cnt] != null) {
+        for (Rectangle element : elemente) {
+            if (element != null) {
                 newArrayLength++;
             }
         }
@@ -98,10 +97,10 @@ public class Editor {
         Rectangle[] ret = new Rectangle[newArrayLength];
         int elem = 0;
 
-        for (int cnt = 0; cnt < this.elemente.length; ++cnt) {
-            if (elemente[cnt] != null) {
-                if (elemente[cnt].pointIn(x, y)) {
-                    ret[elem] = elemente[cnt];
+        for (Rectangle element : elemente) {
+            if (element != null) {
+                if (element.pointIn(x, y)) {
+                    ret[elem] = element;
                 }
             }
         }

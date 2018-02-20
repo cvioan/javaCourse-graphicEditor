@@ -33,11 +33,10 @@ public class Rectangle {
     }
 
     public String toString() {
-        return "(" + this.getX() + ", " + this.getY() + ", " +this.getHorizontal() + ", " + this.getVertical() + ") ";
+        return "(" + this.getX() + ", " + this.getY() + ", " + this.getHorizontal() + ", " + this.getVertical() + ") ";
     }
 
     public boolean pointIn(int xRef, int yRef) {
-         return  (xRef >= this.x && xRef <= this.x + this.vertical) && (yRef >= this.y && yRef <= this.y + this.vertical);
+        return (xRef >= this.x && xRef <= this.x + this.vertical) && (yRef >= this.y && yRef <= this.y + this.vertical);
     }
-
 }
