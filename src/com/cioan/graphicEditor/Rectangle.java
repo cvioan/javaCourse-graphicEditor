@@ -1,9 +1,8 @@
 package com.cioan.graphicEditor;
 
-public class Rectangle {
+public class Rectangle extends Shape {
     private int horizontal;
     private int vertical;
-    private int x, y;
 
     Rectangle(int x, int y, int horizontal, int vertical) {
         this.horizontal = horizontal;
@@ -12,16 +11,9 @@ public class Rectangle {
         this.y = y;
     }
 
-    int getArea() {
-        return (this.horizontal * this.vertical);
-    }
-
-    int getX() {
-        return x;
-    }
-
-    int getY() {
-        return y;
+    @Override
+    public double getArea() {
+        return Utils.roundDoubleTwoDecimals(this.horizontal * this.vertical);
     }
 
     int getHorizontal() {
@@ -33,9 +25,10 @@ public class Rectangle {
     }
 
     public String toString() {
-        return "(" + this.x + ", " + this.y + ", " + this.horizontal + ", " + this.vertical + ") ";
+        return "Rectangle(" + this.x + ", " + this.y + ", " + this.horizontal + ", " + this.vertical + ") ";
     }
 
+    @Override
     public boolean pointIn(int xRef, int yRef) {
         return (xRef >= this.x && xRef <= this.x + this.horizontal) && (yRef >= this.y && yRef <= this.y + this.vertical);
     }
