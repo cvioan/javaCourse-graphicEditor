@@ -23,9 +23,11 @@ public class Editor {
         if (!Editor.isEmpty(elemente)) {
             for (Shape element : elemente) {
                 if (element != null) {
-                    System.out.println(element);
+                    System.out.print(element);
+                    System.out.print(" ");
                 }
             }
+            System.out.println();
         } else {
             throw new EmptyArrayException("Array is empty! Nothing to print.");
         }
@@ -118,7 +120,7 @@ public class Editor {
 
         for (Shape element : elemente) {
             if (element != null) {
-                ret.append(element).append(", ");
+                ret.append(element).append(" ");
 
             }
         }

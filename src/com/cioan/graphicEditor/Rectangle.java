@@ -8,10 +8,10 @@ public class Rectangle extends Shape {
     private int vertical;
 
     Rectangle(int x, int y, int horizontal, int vertical) {
+        super(x, y);
         this.horizontal = horizontal;
         this.vertical = vertical;
-        this.x = x;
-        this.y = y;
+
     }
 
     @Override
@@ -28,7 +28,7 @@ public class Rectangle extends Shape {
     }
 
     public String toString() {
-        return "Rectangle(" + this.x + ", " + this.y + ", " + this.horizontal + ", " + this.vertical + ") ";
+        return "Rectangle(" + this.x + ", " + this.y + ", " + this.horizontal + ", " + this.vertical + ")";
     }
 
     @Override

@@ -25,9 +25,10 @@ public class Client {
             System.out.println();
         }
         System.out.println("Aria totala este: " + editor.getTotalArea());
+        System.out.println();
         System.out.println(editor);
         System.out.println();
-        editor.removeElementsSmallerThan(500);
+        editor.removeElementsSmallerThan(21);
         System.out.println(editor);
         System.out.println();
         Shape[] raport = editor.reportLeftToRight();
@@ -38,7 +39,7 @@ public class Client {
             System.out.println();
         }
         System.out.println();
-        Shape[] elements = editor.getElementsIntersectingPoint(1, 1);
+        Shape[] elements = editor.getElementsIntersectingPoint(10, 10);
         try {
             Editor.printArray(elements);
         } catch (EmptyArrayException e) {
