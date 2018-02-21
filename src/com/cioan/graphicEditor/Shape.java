@@ -16,5 +16,5 @@ public abstract class Shape {
 
     public abstract boolean pointIn(int x, int y);
 
-    public int getMinX() { return this.x; }
+    public abstract int getMinX();
 }

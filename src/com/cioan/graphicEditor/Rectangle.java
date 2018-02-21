@@ -1,5 +1,7 @@
 package com.cioan.graphicEditor;
 
+import com.cioan.graphicEditor.Utils.Utils;
+
 public class Rectangle extends Shape {
     private int horizontal;
     private int vertical;
@@ -31,5 +33,10 @@ public class Rectangle extends Shape {
     @Override
     public boolean pointIn(int xRef, int yRef) {
         return (xRef >= this.x && xRef <= this.x + this.horizontal) && (yRef >= this.y && yRef <= this.y + this.vertical);
+    }
+
+    @Override
+    public int getMinX() {
+        return this.x;
     }
 }

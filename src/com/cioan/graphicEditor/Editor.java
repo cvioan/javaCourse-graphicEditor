@@ -1,12 +1,14 @@
 package com.cioan.graphicEditor;
 
+import com.cioan.graphicEditor.Exceptions.FullArrayException;
+
 @SuppressWarnings("ForLoopReplaceableByForEach")
 public class Editor {
 
     private Shape elemente[] = new Shape[10];
 
 
-    public boolean createRectangle(int x, int y, int width, int height) {
+    public void createRectangle(int x, int y, int width, int height) throws FullArrayException {
         boolean response = false;
         for (int cnt = 0; cnt < elemente.length; ++cnt) {
             if (elemente[cnt] == null) {
@@ -15,10 +17,10 @@ public class Editor {
                 break;
             }
         }
-        return response;
+        if (!response) { throw new FullArrayException("Array is full! Cannot add more Shapes."); }
     }
 
-    public boolean createCircle(int x, int y, int radius) {
+    public void createCircle(int x, int y, int radius) throws FullArrayException {
         boolean response = false;
         for (int cnt = 0; cnt < elemente.length; ++cnt) {
             if (elemente[cnt] == null) {
@@ -27,7 +29,8 @@ public class Editor {
                 break;
             }
         }
-        return response;
+
+        if (!response) { throw new FullArrayException("Array is full! Cannot add more Shapes."); }
     }
 
 
