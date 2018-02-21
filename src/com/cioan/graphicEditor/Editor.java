@@ -2,13 +2,24 @@ package com.cioan.graphicEditor;
 
 import com.cioan.graphicEditor.Exceptions.EmptyArrayException;
 import com.cioan.graphicEditor.Exceptions.FullArrayException;
+import com.cioan.graphicEditor.GraphicLibraries.GEIOne;
+import com.cioan.graphicEditor.GraphicLibraries.GEITwo;
 
 @SuppressWarnings("ForLoopReplaceableByForEach")
 public class Editor {
 
+    private static IDrawable graphicEngine = new GEIOne();
     private Shape elemente[] = new Shape[10];
 
-    public static boolean isEmpty(Shape[] elemente) {
+    public static void toggleGraphicEngine() {
+        if (graphicEngine instanceof GEIOne) {
+            graphicEngine = new GEITwo();
+        } else {
+            graphicEngine = new GEIOne();
+        }
+    }
+
+    private static boolean isEmpty(Shape[] elemente) {
         boolean response = true;
         for (Shape element : elemente) {
             if (element != null) {
@@ -30,6 +41,14 @@ public class Editor {
             System.out.println();
         } else {
             throw new EmptyArrayException("Array is empty! Nothing to print.");
+        }
+    }
+
+    public void drawAll() {
+        for (Shape element : elemente) {
+            if (element != null) {
+                element.draw(graphicEngine);
+            }
         }
     }
 

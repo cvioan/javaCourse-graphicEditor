@@ -30,4 +30,11 @@ public class Circle extends Shape {
     public int getMinX() {
         return this.x - radius;
     }
+
+    @Override
+    public void draw(IDrawable lib) {
+        System.out.println("Circle");
+        lib.drawCircle(x, y, radius);
+        System.out.println();
+    }
 }

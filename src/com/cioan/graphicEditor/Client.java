@@ -26,10 +26,20 @@ public class Client {
         }
         System.out.println("Aria totala este: " + editor.getTotalArea());
         System.out.println();
+        editor.drawAll();
+        System.out.println();
+        Editor.toggleGraphicEngine();
+        editor.drawAll();
+        System.out.println();
         System.out.println(editor);
         System.out.println();
         editor.removeElementsSmallerThan(21);
         System.out.println(editor);
+        System.out.println();
+        editor.drawAll();
+        System.out.println();
+        Editor.toggleGraphicEngine();
+        editor.drawAll();
         System.out.println();
         Shape[] raport = editor.reportLeftToRight();
         try {

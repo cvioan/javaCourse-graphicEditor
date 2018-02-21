@@ -40,4 +40,14 @@ public class Rectangle extends Shape {
     public int getMinX() {
         return this.x;
     }
+
+    @Override
+    public void draw(IDrawable lib) {
+        System.out.println("Rectangle");
+        lib.drawLine(x, y, x + horizontal, y);
+        lib.drawLine(x + horizontal, y, x + horizontal, y + vertical);
+        lib.drawLine(x + horizontal, y + vertical, x,  y + vertical);
+        lib.drawLine(x,  y + vertical, x, y);
+        System.out.println();
+    }
 }

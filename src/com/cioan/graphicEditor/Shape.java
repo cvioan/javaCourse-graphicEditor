@@ -5,7 +5,7 @@ public abstract class Shape {
     int x;
     int y;
 
-    public Shape(int x, int y) {
+    Shape(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -23,4 +23,6 @@ public abstract class Shape {
     public abstract boolean pointIn(int x, int y);
 
     public abstract int getMinX();
+
+    public abstract void draw(IDrawable lib);
 }
