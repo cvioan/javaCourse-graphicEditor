@@ -102,7 +102,7 @@ public class Editor {
         for (Rectangle element : elemente) {
             if (element != null) {
                 if (element.pointIn(x, y)) {
-                    ret[elem] = element;
+                    ret[elem++] = element;
                 }
             }
         }
