@@ -1,5 +1,6 @@
 package com.cioan.graphicEditor;
 
+import com.cioan.graphicEditor.Exceptions.EmptyArrayException;
 import com.cioan.graphicEditor.Exceptions.FullArrayException;
 
 public class Client {
@@ -26,25 +27,23 @@ public class Client {
         System.out.println("Aria totala este: " + editor.getTotalArea());
         System.out.println(editor);
         System.out.println();
-        editor.removeElementsSmallerThan(2);
+        editor.removeElementsSmallerThan(500);
         System.out.println(editor);
         System.out.println();
         Shape[] raport = editor.reportLeftToRight();
-        for (Shape element: raport) {
-            System.out.println(element);
+        try {
+            Editor.printArray(raport);
+        } catch (EmptyArrayException e) {
+            System.out.println(e.getMessage());
+            System.out.println();
         }
         System.out.println();
         Shape[] elements = editor.getElementsIntersectingPoint(1, 1);
-        int qty = 0;
-        for (Shape element: elements) {
-
-            if (element != null) {
-                System.out.println(element);
-                qty++;
-            }
-        }
-        if (qty==0) {
-            System.out.println("Nici un element nu intersecteaza punctul");
+        try {
+            Editor.printArray(elements);
+        } catch (EmptyArrayException e) {
+            System.out.println(e.getMessage());
+            System.out.println();
         }
     }
 

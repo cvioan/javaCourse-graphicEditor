@@ -1,5 +1,6 @@
 package com.cioan.graphicEditor;
 
+import com.cioan.graphicEditor.Exceptions.EmptyArrayException;
 import com.cioan.graphicEditor.Exceptions.FullArrayException;
 
 @SuppressWarnings("ForLoopReplaceableByForEach")
@@ -7,6 +8,28 @@ public class Editor {
 
     private Shape elemente[] = new Shape[10];
 
+    public static boolean isEmpty(Shape[] elemente) {
+        boolean response = true;
+        for (Shape element : elemente) {
+            if (element != null) {
+                response = false;
+                break;
+            }
+        }
+        return response;
+    }
+
+    public static void printArray(Shape[] elemente) throws EmptyArrayException {
+        if (!Editor.isEmpty(elemente)) {
+            for (Shape element : elemente) {
+                if (element != null) {
+                    System.out.println(element);
+                }
+            }
+        } else {
+            throw new EmptyArrayException("Array is empty! Nothing to print.");
+        }
+    }
 
     public void createRectangle(int x, int y, int width, int height) throws FullArrayException {
         boolean response = false;
@@ -17,7 +40,9 @@ public class Editor {
                 break;
             }
         }
-        if (!response) { throw new FullArrayException("Array is full! Cannot add more Shapes."); }
+        if (!response) {
+            throw new FullArrayException("Array is full! Cannot add more Shapes.");
+        }
     }
 
     public void createCircle(int x, int y, int radius) throws FullArrayException {
@@ -30,9 +55,10 @@ public class Editor {
             }
         }
 
-        if (!response) { throw new FullArrayException("Array is full! Cannot add more Shapes."); }
+        if (!response) {
+            throw new FullArrayException("Array is full! Cannot add more Shapes.");
+        }
     }
-
 
     public double getTotalArea() {
         double totalArea = 0;
@@ -44,7 +70,7 @@ public class Editor {
         return totalArea;
     }
 
-    public void removeElementsSmallerThan(int area) {
+    public void removeElementsSmallerThan(double area) {
         for (int cnt = 0; cnt < elemente.length; ++cnt) {
             if (elemente[cnt] != null) {
                 if (elemente[cnt].getArea() < area) {
@@ -87,7 +113,6 @@ public class Editor {
         return report;
     }
 
-
     public String toString() {
         StringBuilder ret = new StringBuilder("");
 
@@ -95,8 +120,6 @@ public class Editor {
             if (element != null) {
                 ret.append(element).append(", ");
 
-            } else {
-                ret.append("null, ");
             }
         }
         return ret.toString();

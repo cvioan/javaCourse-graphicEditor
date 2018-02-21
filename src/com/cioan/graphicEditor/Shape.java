@@ -1,5 +1,6 @@
 package com.cioan.graphicEditor;
 
+@SuppressWarnings("unused")
 public abstract class Shape {
     int x;
     int y;
