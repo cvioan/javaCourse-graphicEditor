@@ -1,4 +1,4 @@
-package com.cioan.graphicEditor.Exceptions;
+package com.cioan.graphicEditor.exceptions;
 
 public class FullArrayException extends Exception {
     public FullArrayException( String message) {

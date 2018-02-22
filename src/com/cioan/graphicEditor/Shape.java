@@ -1,7 +1,6 @@
 package com.cioan.graphicEditor;
-
 @SuppressWarnings("unused")
-public abstract class Shape {
+public abstract class Shape implements Comparable<Shape> {
     int x;
     int y;
 
@@ -25,4 +24,7 @@ public abstract class Shape {
     public abstract int getMinX();
 
     public abstract void draw(IDrawable lib);
+
+    public abstract boolean equals(Shape other);
+
 }

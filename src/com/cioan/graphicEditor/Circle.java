@@ -1,8 +1,8 @@
 package com.cioan.graphicEditor;
 
-import com.cioan.graphicEditor.Utils.Utils;
+import com.cioan.graphicEditor.utils.Utils;
 
-public class Circle extends Shape {
+public class Circle extends Shape implements Comparable<Shape>{
     private int radius;
 
     Circle(int x, int y, int radius) {
@@ -22,7 +22,7 @@ public class Circle extends Shape {
     @Override
     public boolean pointIn(int xRef, int yRef) {
         double distance;
-        distance = Math.sqrt(Math.pow(xRef-this.x, 2) + Math.pow(yRef - this.y, 2));
+        distance = Math.sqrt(Math.pow(xRef - this.x, 2) + Math.pow(yRef - this.y, 2));
         return (distance < radius);
     }
 
@@ -37,4 +37,16 @@ public class Circle extends Shape {
         lib.drawCircle(x, y, radius);
         System.out.println();
     }
+
+    @Override
+    public boolean equals(Shape other) {
+        Circle ot = (Circle) other;
+        return (this.x == ot.x) && (this.y == ot.y) && (this.radius == ot.radius);
+    }
+
+    @Override
+    public int compareTo(Shape o1) {
+        return this.getMinX() - o1.getMinX();
+    }
 }
+

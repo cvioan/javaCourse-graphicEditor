@@ -1,4 +1,4 @@
-package com.cioan.graphicEditor.Utils;
+package com.cioan.graphicEditor.utils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

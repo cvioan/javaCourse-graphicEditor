@@ -1,144 +1,97 @@
 package com.cioan.graphicEditor;
 
-import com.cioan.graphicEditor.Exceptions.EmptyArrayException;
-import com.cioan.graphicEditor.Exceptions.FullArrayException;
-import com.cioan.graphicEditor.GraphicLibraries.GEIOne;
-import com.cioan.graphicEditor.GraphicLibraries.GEITwo;
+import com.cioan.graphicEditor.exceptions.EmptyArrayException;
+import com.cioan.graphicEditor.exceptions.FullArrayException;
+import com.cioan.graphicEditor.graphicAdapters.GraphicEngineAdapterOne;
+import com.cioan.graphicEditor.graphicAdapters.GraphicEngineAdapterTwo;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @SuppressWarnings("ForLoopReplaceableByForEach")
 public class Editor {
 
-    private static IDrawable graphicEngine = new GEIOne();
-    private Shape elemente[] = new Shape[10];
+    private static IDrawable graphicEngine = new GraphicEngineAdapterOne();
+    private List<Shape> elemente = new ArrayList<>();
 
     public static void toggleGraphicEngine() {
-        if (graphicEngine instanceof GEIOne) {
-            graphicEngine = new GEITwo();
+        if (graphicEngine instanceof GraphicEngineAdapterOne) {
+            graphicEngine = new GraphicEngineAdapterTwo();
         } else {
-            graphicEngine = new GEIOne();
-        }
-    }
-
-    private static boolean isEmpty(Shape[] elemente) {
-        boolean response = true;
-        for (Shape element : elemente) {
-            if (element != null) {
-                response = false;
-                break;
+            graphicEngine = new GraphicEngineAdapterOne();
             }
         }
-        return response;
-    }
 
-    public static void printArray(Shape[] elemente) throws EmptyArrayException {
-        if (!Editor.isEmpty(elemente)) {
+        private static boolean isEmpty(List<Shape> elemente) {
+            return elemente.size() == 0;
+        }
+
+        public static void printArray(List<Shape> elemente) throws EmptyArrayException {
+            if (!Editor.isEmpty(elemente)) {
+                for (Shape element : elemente) {
+                    if (element != null) {
+                        System.out.print(element);
+                        System.out.print(" ");
+                    }
+                }
+                System.out.println();
+            } else {
+                throw new EmptyArrayException("Array is empty! Nothing to print.");
+            }
+        }
+
+        public void drawAll() {
             for (Shape element : elemente) {
                 if (element != null) {
-                    System.out.print(element);
-                    System.out.print(" ");
-                }
-            }
-            System.out.println();
-        } else {
-            throw new EmptyArrayException("Array is empty! Nothing to print.");
-        }
-    }
-
-    public void drawAll() {
-        for (Shape element : elemente) {
-            if (element != null) {
-                element.draw(graphicEngine);
-            }
-        }
-    }
-
-    public void createRectangle(int x, int y, int width, int height) throws FullArrayException {
-        boolean response = false;
-        for (int cnt = 0; cnt < elemente.length; ++cnt) {
-            if (elemente[cnt] == null) {
-                elemente[cnt] = new Rectangle(x, y, width, height);
-                response = true;
-                break;
-            }
-        }
-        if (!response) {
-            throw new FullArrayException("Array is full! Cannot add more Shapes.");
-        }
-    }
-
-    public void createCircle(int x, int y, int radius) throws FullArrayException {
-        boolean response = false;
-        for (int cnt = 0; cnt < elemente.length; ++cnt) {
-            if (elemente[cnt] == null) {
-                elemente[cnt] = new Circle(x, y, radius);
-                response = true;
-                break;
-            }
-        }
-
-        if (!response) {
-            throw new FullArrayException("Array is full! Cannot add more Shapes.");
-        }
-    }
-
-    public double getTotalArea() {
-        double totalArea = 0;
-        for (Shape element : elemente) {
-            if (element != null) {
-                totalArea = totalArea + element.getArea();
-            }
-        }
-        return totalArea;
-    }
-
-    public void removeElementsSmallerThan(double area) {
-        for (int cnt = 0; cnt < elemente.length; ++cnt) {
-            if (elemente[cnt] != null) {
-                if (elemente[cnt].getArea() < area) {
-                    elemente[cnt] = null;
-                }
-            }
-        }
-    }
-
-    public Shape[] reportLeftToRight() {
-        int newArrayLength = 0;
-        for (Shape element : elemente) {
-            if (element != null) {
-                newArrayLength++;
-            }
-        }
-
-        Shape[] report = new Shape[newArrayLength];
-
-        int elem = 0;
-        for (Shape element : elemente) {
-            if (element != null) {
-                report[elem] = element;
-                elem++;
-            }
-        }
-
-        Shape aux;
-
-        for (int cnt = 0; cnt < newArrayLength - 2; cnt++) {
-            for (int cnt2 = cnt + 1; cnt2 < newArrayLength - 1; cnt2++) {
-                if (report[cnt].getMinX() > report[cnt2].getMinX()) {
-                    aux = report[cnt2];
-                    report[cnt2] = report[cnt];
-                    report[cnt] = aux;
+                    element.draw(graphicEngine);
                 }
             }
         }
 
-        return report;
-    }
+        public void createRectangle(int x, int y, int width, int height){
+            elemente.add(new Rectangle(x, y, width, height));
+        }
 
-    public String toString() {
-        StringBuilder ret = new StringBuilder("");
+        public void createCircle(int x, int y, int radius){
+            elemente.add(new Circle(x, y, radius));
+        }
 
-        for (Shape element : elemente) {
-            if (element != null) {
+        public double getTotalArea() {
+            double totalArea = 0;
+            for (Shape element : elemente) {
+                if (element != null) {
+                    totalArea = totalArea + element.getArea();
+                }
+            }
+            return totalArea;
+        }
+
+        public void removeElementsSmallerThan(double area) {
+            List<Shape> removable = new ArrayList<>();
+            for(Shape element: elemente) {
+                if (element.getArea() < area ) {
+                    removable.add(element);
+                }
+            }
+
+            for (Shape remElement: removable) {
+                elemente.remove(remElement);
+            }
+        }
+
+        public List<Shape> reportLeftToRight() {
+
+            List<Shape> sorted = elemente;
+            Collections.sort(sorted);
+            return sorted;
+        }
+
+        public String toString() {
+            StringBuilder ret = new StringBuilder("");
+
+            for (Shape element : elemente) {
+                if (element != null) {
                 ret.append(element).append(" ");
 
             }
@@ -146,23 +99,11 @@ public class Editor {
         return ret.toString();
     }
 
-    public Shape[] getElementsIntersectingPoint(int x, int y) {
-        int newArrayLength = 0;
-
-        for (Shape element : elemente) {
-            if (element != null) {
-                newArrayLength++;
-            }
-        }
-
-        Shape[] ret = new Shape[newArrayLength];
-        int elem = 0;
-
-        for (Shape element : elemente) {
-            if (element != null) {
-                if (element.pointIn(x, y)) {
-                    ret[elem++] = element;
-                }
+    public List<Shape> getElementsIntersectingPoint(int x, int y) {
+        List<Shape> ret = new ArrayList<>();
+        for (Shape element: elemente) {
+            if (element.pointIn(x, y)) {
+                ret.add(element);
             }
         }
 

@@ -1,9 +1,9 @@
 package com.cioan.graphicEditor;
 
-import com.cioan.graphicEditor.Utils.Utils;
+import com.cioan.graphicEditor.utils.Utils;
 
-@SuppressWarnings("unused")
-public class Rectangle extends Shape {
+
+public class Rectangle extends Shape implements Comparable<Shape> {
     private int horizontal;
     private int vertical;
 
@@ -49,5 +49,16 @@ public class Rectangle extends Shape {
         lib.drawLine(x + horizontal, y + vertical, x,  y + vertical);
         lib.drawLine(x,  y + vertical, x, y);
         System.out.println();
+    }
+
+    @Override
+    public boolean equals(Shape other) {
+        Rectangle ot = (Rectangle) other;
+        return (this.x == ot.x) && (this.y == ot.y) && (this.vertical == ot.vertical) && (this.horizontal == ot.horizontal);
+    }
+
+    @Override
+    public int compareTo(Shape o) {
+        return this.getMinX() - o.getMinX();
     }
 }
