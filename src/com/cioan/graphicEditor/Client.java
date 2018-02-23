@@ -1,8 +1,8 @@
 package com.cioan.graphicEditor;
 
 import com.cioan.graphicEditor.exceptions.EmptyArrayException;
-import com.cioan.graphicEditor.exceptions.FullArrayException;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Client {
@@ -51,7 +51,20 @@ public class Client {
             System.out.println(e.getMessage());
             System.out.println();
         }
+        System.out.println();
+        System.out.println(editor);
+        System.out.println();
+        try {
+            editor.save("elements.bin");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            editor.restore("elements.bin");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
-
-
 }

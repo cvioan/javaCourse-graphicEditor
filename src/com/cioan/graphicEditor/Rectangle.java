@@ -3,7 +3,7 @@ package com.cioan.graphicEditor;
 import com.cioan.graphicEditor.utils.Utils;
 
 
-public class Rectangle extends Shape implements Comparable<Shape> {
+public class Rectangle extends Shape {
     private int horizontal;
     private int vertical;
 

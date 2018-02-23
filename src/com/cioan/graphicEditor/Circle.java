@@ -2,7 +2,7 @@ package com.cioan.graphicEditor;
 
 import com.cioan.graphicEditor.utils.Utils;
 
-public class Circle extends Shape implements Comparable<Shape>{
+public class Circle extends Shape {
     private int radius;
 
     Circle(int x, int y, int radius) {

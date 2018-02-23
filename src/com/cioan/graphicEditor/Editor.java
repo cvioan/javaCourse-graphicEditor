@@ -5,6 +5,7 @@ import com.cioan.graphicEditor.exceptions.FullArrayException;
 import com.cioan.graphicEditor.graphicAdapters.GraphicEngineAdapterOne;
 import com.cioan.graphicEditor.graphicAdapters.GraphicEngineAdapterTwo;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,6 +15,21 @@ public class Editor {
 
     private static IDrawable graphicEngine = new GraphicEngineAdapterOne();
     private List<Shape> elemente = new ArrayList<>();
+
+    public void save(String name) throws IOException {
+        FileOutputStream outputFile = new FileOutputStream(name);
+        ObjectOutputStream outputStream = new ObjectOutputStream(outputFile);
+        outputStream.writeObject(elemente);
+        outputStream.close();
+    }
+
+    public void restore(String name) throws IOException, ClassNotFoundException {
+        FileInputStream inputFile = new FileInputStream(name);
+        ObjectInputStream inputStream = new ObjectInputStream(inputFile);
+        elemente = (List<Shape>) inputStream.readObject();
+        inputStream.close();
+    }
+
 
     public static void toggleGraphicEngine() {
         if (graphicEngine instanceof GraphicEngineAdapterOne) {

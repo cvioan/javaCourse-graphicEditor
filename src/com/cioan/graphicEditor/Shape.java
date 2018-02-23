@@ -1,6 +1,9 @@
 package com.cioan.graphicEditor;
+
+import java.io.Serializable;
+
 @SuppressWarnings("unused")
-public abstract class Shape implements Comparable<Shape> {
+public abstract class Shape implements Comparable<Shape>, Serializable {
     int x;
     int y;
 
